@@ -2,26 +2,28 @@
 
 # Open the data and make a dictionary
 advent_input = open('input_2.txt', 'r')
-policy_list = []
-password_list = []
+
+password_checks = []
+
+
+class PasswordCheck:
+    def __init__(self, policy, password):
+        self.policy = policy
+        self.password = password
+
 
 for line in advent_input:
     (policy, password) = line.strip().split(':')
-    policy_list.append(policy)
-    password_list.append(password)
+    password_checks.append(PasswordCheck(policy, password))
 
 advent_input.close()
 
 # Count the correct passwords
 correct_passwords = 0
 
-for i in range(len(password_list)):
-    password = password_list[i]
-    policy = policy_list[i]
-
-    number, letter = policy.split(' ')
-
-    letter_count = password.count(letter)
+for password_check in password_checks:
+    number, letter = password_check.policy.split(' ')
+    letter_count = password_check.password.count(letter)
     min_count, max_count = number.split('-')
 
     if int(min_count) <= letter_count <= int(max_count):
