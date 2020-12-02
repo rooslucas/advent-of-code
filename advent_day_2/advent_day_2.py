@@ -16,20 +16,36 @@ class PasswordCheck:
 
 # Parse input into PasswordChecks
 for line in advent_input:
-    policy, password = line.strip().split(':')
+    policy, password = line.strip().split(': ')
     number, letter = policy.split(' ')
     min_count, max_count = number.split('-')
     password_checks.append(PasswordCheck(password, min_count, max_count, letter))
 
 advent_input.close()
 
-# Count the correct passwords
-correct_passwords = 0
+# Count the correct passwords Part one
+correct_passwords_1 = 0
 
 for password_check in password_checks:
     letter_count = password_check.password.count(password_check.letter)
 
     if int(password_check.min_count) <= letter_count <= int(password_check.max_count):
-        correct_passwords += 1
+        correct_passwords_1 += 1
 
-print(correct_passwords)
+print(correct_passwords_1)
+
+# Count the correct passwords Part two
+correct_passwords_2 = 0
+
+for password_check in password_checks:
+    position_a = password_check.password[int(password_check.min_count) - 1]
+    position_b = password_check.password[int(password_check.max_count) - 1]
+
+    if position_a == password_check.letter and position_b != password_check.letter:
+        print(password_check.letter, position_a, position_b)
+        correct_passwords_2 += 1
+    elif position_b == password_check.letter and position_a != password_check.letter:
+        correct_passwords_2 += 1
+        print(password_check.letter, position_b, position_a)
+
+print(correct_passwords_2)
