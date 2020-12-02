@@ -41,11 +41,7 @@ for password_check in password_checks:
     position_a = password_check.password[int(password_check.min_count) - 1]
     position_b = password_check.password[int(password_check.max_count) - 1]
 
-    if position_a == password_check.letter and position_b != password_check.letter:
-        print(password_check.letter, position_a, position_b)
+    if (position_a == password_check.letter) ^ (position_b == password_check.letter):
         correct_passwords_2 += 1
-    elif position_b == password_check.letter and position_a != password_check.letter:
-        correct_passwords_2 += 1
-        print(password_check.letter, position_b, position_a)
 
 print(correct_passwords_2)
