@@ -6,7 +6,6 @@ advent_input.close()
 # Make the list proper
 advent_list = [x[:-1] for x in a_list]
 advent_list = [int(i) for i in advent_list]
-print(advent_list)
 
 # Look for the 2020 ~ part 1
 for i in advent_list:
