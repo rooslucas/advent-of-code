@@ -1,5 +1,5 @@
 # Open the data and make list
-advent_input = open('input.txt', 'r')
+advent_input = open('advent_day_1/input.txt', 'r')
 a_list = list(advent_input)
 advent_input.close()
 
