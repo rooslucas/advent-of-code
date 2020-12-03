@@ -10,21 +10,18 @@ advent_data = [x.rstrip() for x in advent_data]
 def check_trees(right, down):
     line_index = 0
     word_index = 0
-    trees_list = []
+    trees_count = 0
+
     while line_index < len(advent_data) - 1:
         word_index += right
         word = word_index % len(advent_data[line_index])
         line_index += down
         line = advent_data[line_index]
-        obstacle = line[word]
-        if obstacle == '.':
-            obstacle = '0'
-            trees_list.append(obstacle)
-        elif obstacle == '#':
-            obstacle = 'X'
-            trees_list.append(obstacle)
 
-    return trees_list.count('X')
+        if line[word] == '#':
+            trees_count += 1
+
+    return trees_count
 
 
 # Count the trees for 5 different slopes
