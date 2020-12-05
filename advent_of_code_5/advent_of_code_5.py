@@ -15,48 +15,48 @@ class Seat:
     def id(self):
         return self.row * 8 + self.column
 
+    @staticmethod
+    def create_seat(string):
+        start_row = 0
+        end_row = 127
+        start_column = 0
+        end_column = 7
+        for letter in string:
+            if letter == 'B':
+                start_row = int(round(start_row + ((end_row - start_row) / 2)))
+            elif letter == 'F':
+                end_row = int(end_row - ((end_row - start_row) / 2))
+            elif letter == 'R':
+                start_column = int(round(start_column + ((end_column - start_column) / 2)))
+            elif letter == 'L':
+                end_column = int(end_column - ((end_column - start_column) / 2))
 
-def create_seat(string):
-    start_row = 0
-    end_row = 127
-    start_column = 0
-    end_column = 7
-    for letter in string:
-        if letter == 'B':
-            start_row = int(round(start_row + ((end_row - start_row) / 2)))
-        elif letter == 'F':
-            end_row = int(end_row - ((end_row - start_row) / 2))
-        elif letter == 'R':
-            start_column = int(round(start_column + ((end_column - start_column) / 2)))
-        elif letter == 'L':
-            end_column = int(end_column - ((end_column - start_column) / 2))
+            # Decide the row
+        if string[6] == 'F':
+            row = start_row
+        elif string[6] == 'B':
+            row = end_row
+        else:
+            print('INVALID')
 
-        # Decide the row
-    if string[6] == 'F':
-        row = start_row
-    elif string[6] == 'B':
-        row = end_row
-    else:
-        print('INVALID')
+        # Decide the column
+        if string[9] == 'R':
+            column = end_column
+        elif string[9] == 'L':
+            column = start_column
 
-    # Decide the column
-    if string[9] == 'R':
-        column = end_column
-    elif string[9] == 'L':
-        column = start_column
+        else:
+            print('INVALID')
 
-    else:
-        print('INVALID')
-
-    new_seat = Seat(row, column)
-    return new_seat.id()
+        new_seat = Seat(row, column)
+        return new_seat.id()
 
 
 # Create the list with seats
 seating_list = []
 
 for line in advent_data:
-    seat = create_seat(line)
+    seat = Seat.create_seat(line)
     seating_list.append(seat)
 
 # Part one
