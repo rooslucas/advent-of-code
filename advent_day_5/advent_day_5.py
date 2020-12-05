@@ -8,20 +8,12 @@ advent_data = [x.rstrip() for x in advent_data]
 
 # Create class seat
 class Seat:
-    def __init__(self, row, column):
-        self.row = row
-        self.column = column
-
-    def id(self):
-        return self.row * 8 + self.column
-
-    @staticmethod
-    def create_seat(string):
+    def __init__(self, str):
         start_row = 0
         end_row = 127
         start_column = 0
         end_column = 7
-        for letter in string:
+        for letter in str:
             if letter == 'B':
                 start_row = int(round(start_row + ((end_row - start_row) / 2)))
             elif letter == 'F':
@@ -32,32 +24,31 @@ class Seat:
                 end_column = int(end_column - ((end_column - start_column) / 2))
 
             # Decide the row
-        if string[6] == 'F':
+        if str[6] == 'F':
             row = start_row
-        elif string[6] == 'B':
+        elif str[6] == 'B':
             row = end_row
         else:
             print('INVALID')
 
         # Decide the column
-        if string[9] == 'R':
+        if str[9] == 'R':
             column = end_column
-        elif string[9] == 'L':
+        elif str[9] == 'L':
             column = start_column
 
         else:
             print('INVALID')
 
-        new_seat = Seat(row, column)
-        return new_seat.id()
+        self.row = row
+        self.column = column
+
+    def id(self):
+        return self.row * 8 + self.column
 
 
 # Create the list with seats
-seating_list = []
-
-for line in advent_data:
-    seat = Seat.create_seat(line)
-    seating_list.append(seat)
+seating_list = [Seat(line).id() for line in advent_data]
 
 # Part one
 seating_list.sort()
@@ -67,3 +58,4 @@ print(seating_list[-1])
 for i in range(len(seating_list)):
     if (i + 1) in seating_list and (i - 1) in seating_list and i not in seating_list:
         print(i)
+
