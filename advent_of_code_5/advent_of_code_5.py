@@ -12,9 +12,8 @@ class Seat:
         self.row = row
         self.column = column
 
-
-def get_id(seat):
-    return seat.row * 8 + seat.column
+    def id(self):
+        return self.row * 8 + self.column
 
 
 def create_seat(string):
@@ -50,7 +49,7 @@ def create_seat(string):
         print('INVALID')
 
     new_seat = Seat(row, column)
-    return get_id(new_seat)
+    return new_seat.id()
 
 
 # Create the list with seats
@@ -65,4 +64,6 @@ seating_list.sort()
 print(seating_list[-1])
 
 # Part two
-
+for i in range(len(seating_list)):
+    if (i + 1) in seating_list and (i - 1) in seating_list and i not in seating_list:
+        print(i)
