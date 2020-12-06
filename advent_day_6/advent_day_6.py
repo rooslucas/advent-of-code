@@ -11,7 +11,7 @@ correct_questions = 0
 for group in question_list:
     word_correct = 0
     group = ', '.join(group)
-    print(group)
+
     for letter in alfabet:
         if letter in group:
             word_correct += 1
