@@ -1,16 +1,13 @@
 advent_input = open('input_6.txt')
 advent_data = advent_input.read()
-
 question_list = [line.split('\n') for line in advent_data.split('\n\n')]
-
-print(question_list)
 
 alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
            'w', 'x', 'y', 'z']
 
+# Part one
 correct_questions = 0
 
-# Part one
 for group in question_list:
     word_correct = 0
     group = ', '.join(group)
