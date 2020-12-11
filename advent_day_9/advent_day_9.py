@@ -4,6 +4,8 @@ advent_data = advent_input.readlines()
 advent_data = [int(x.rstrip()) for x in advent_data]
 
 # Part one
+end_number = 0
+
 for number in advent_data:
     number_list = []
     index_end = advent_data.index(number)
@@ -20,6 +22,17 @@ for number in advent_data:
             number_list.append(ii + xx)
 
     if number not in number_list and index_end > 25:
-        print(number)
+        end_number = number
 
 # Part two
+for number in advent_data:
+    count_list = []
+    count = 0
+    start = advent_data.index(number)
+    for i in range(start, len(advent_data), 1):
+        count += advent_data[i]
+        count_list.append(advent_data[i])
+        if count == end_number:
+            print(min(count_list) + max(count_list))
+
+
