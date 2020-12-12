@@ -22,25 +22,26 @@ index_list = []
 
 # Part one
 while True:
-    instruction = instructions[index]
-    if instruction not in first_round:
-        index_list.append(index)
-        if instruction.operation == 'acc':
-            accumulator += int(instruction.argument)
-            index += 1
-            first_round.append(instruction)
-        elif instruction.operation == 'jmp':
-            index += int(instruction.argument)
-            first_round.append(instruction)
-        elif instruction.operation == 'nop':
-            index += 1
-            first_round.append(instruction)
-    else:
+    if index == 612:
         break
+    else:
+        instruction = instructions[index]
+        if instruction not in first_round:
+            index_list.append(index)
+            if instruction.operation == 'acc':
+                accumulator += int(instruction.argument)
+                index += 1
+                first_round.append(instruction)
+            elif instruction.operation == 'jmp':
+                index += int(instruction.argument)
+                first_round.append(instruction)
+            elif instruction.operation == 'nop':
+                index += 1
+                first_round.append(instruction)
+        else:
+            break
 
 print(accumulator)
-print(len(index_list))
-print(len(first_round))
 
 # Part two
 
@@ -53,35 +54,56 @@ for index in index_list:
 
 print(len(index_list))
 
-for attempt in index_list:
-    while True:
-        index = 0
-        accumulator_2 = 0
-        index_list_2 = []
-        if instructions[attempt].operation == 'jmp':
-            instructions[attempt].operation = 'nop'
-        elif instructions[attempt].operation == 'nop':
-            instructions[attempt].operation = 'jmp'
-        while True:
-            instruction = instructions[index]
-            if index == 612:
-                break
-            elif index in index_list_2:
-                break
-            else:
-                index_list_2.append(index)
-                if instruction.operation == 'acc':
-                    accumulator_2 += int(instruction.argument)
-                    index += 1
-                elif instruction.operation == 'jmp':
-                    index += int(instruction.argument)
-                elif instruction.operation == 'nop':
-                    index += 1
-        if index == 612:
-            break
-        if instructions[attempt].operation == 'jmp':
-            instructions[attempt].operation = 'nop'
-        elif instructions[attempt].operation == 'nop':
-            instructions[attempt].operation = 'jmp'
+# for attempt in index_list:
+#     print(attempt)
+#     i = 0
+#     while i <= 612:
+#         index = 0
+#         accumulator_2 = 0
+#         second_round = []
+#         if instructions[attempt].operation == 'jmp':
+#             instructions[attempt].operation = 'nop'
+#         elif instructions[attempt].operation == 'nop':
+#             instructions[attempt].operation = 'jmp'
+#         while True:
+#             instruction = instructions[index]
+#             if instruction not in second_round:
+#                 index_list.append(index)
+#                 if index == 612:
+#                     print(instruction.operation, instruction.argument)
+#                     print(attempt)
+#                     break
+#                 if instruction.operation == 'acc':
+#                     accumulator += int(instruction.argument)
+#                     index += 1
+#                     second_round.append(instruction)
+#                 elif instruction.operation == 'jmp':
+#                     index += int(instruction.argument)
+#                     second_round.append(instruction)
+#                 elif instruction.operation == 'nop':
+#                     index += 1
+#                     second_round.append(instruction)
+#             else:
+#                 break
+#         if index == 612:
+#             break
+#         if instructions[attempt].operation == 'jmp':
+#             instructions[attempt].operation = 'nop'
+#         elif instructions[attempt].operation == 'nop':
+#             instructions[attempt].operation = 'jmp'
+#         i += 1
 
-print(accumulator_2)
+# accumulator_2 = 0
+# while True:
+#     instruction = instructions[index]
+#     print(index)
+#     if instruction.operation == 'acc':
+#         accumulator_2 += int(instruction.argument)
+#         index += 1
+#     elif instruction.operation == 'jmp':
+#         index += int(instruction.argument)
+#     elif instruction.operation == 'nop':
+#         index += 1
+#
+#
+# print(accumulator_2)
